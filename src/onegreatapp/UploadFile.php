@@ -6,6 +6,7 @@ class UploadFile {
   protected $destination;
   protected $messages = [];
   protected $maxSize = 51200;
+  protected $permittedTypes = ['image/jpeg', 'image/png'];
 
   public function __construct($uploadFolder) {
     if(!is_dir($uploadFolder) || !is_writeable($uploadFolder)) {
@@ -49,7 +50,6 @@ class UploadFile {
     if(in_array($last, ['g', 'm', 'k'])) {
       // Explicit cast to number removes the "M, K, or G"
       $val = (float) $val;
-      echo 'float val '.$val .'<br>';
       switch ($last) {
           case 'g':
               $val *= 1024;
@@ -59,7 +59,6 @@ class UploadFile {
               $val *= 1024;
       }
     }
-    echo 'new val '.$val .'<br>';
     return $val;
   }
 
@@ -78,6 +77,9 @@ class UploadFile {
       return false;
     }
     if(!$this->check_size($file)) {
+      return false;
+    }
+    if(!$this->check_type($file)) {
       return false;
     }
     return true;
@@ -111,6 +113,15 @@ class UploadFile {
       return false;
     } else {
       return true;
+    }
+  }
+
+  protected function check_type($file) {
+    if(in_array($file['type'], $this->permittedTypes)) {
+      return true;
+    } else {
+      $this->messages[] = $file['name'] . ' is not permitted type of file.';
+      return false;
     }
   }
 
