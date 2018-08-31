@@ -7,6 +7,7 @@ class UploadFile {
   protected $messages = [];
   protected $maxSize = 51200;
   protected $permittedTypes = ['image/jpeg', 'image/png'];
+  protected $newFileName;
 
   public function __construct($uploadFolder) {
     if(!is_dir($uploadFolder) || !is_writeable($uploadFolder)) {
@@ -82,6 +83,7 @@ class UploadFile {
     if(!$this->check_type($file)) {
       return false;
     }
+    $this->check_name($file);
     return true;
   }
 
@@ -125,8 +127,23 @@ class UploadFile {
     }
   }
 
+  protected function check_name($file) {
+    // eventually be capable of handling multiple file uploads.
+    // So, newName needs to be cleared each time this method is used.
+    $this->newFileName = null;
+    $noSpacesFileName = str_replace(' ', '_', $file['name']);
+    if($noSpacesFileName != $file['name']) {
+      $this->newFileName = $noSpacesFileName;
+    }
+  }
+
   protected function move_file($file) {
     // add to messages array
-    $this->messages[] = $file['name'] . ' was uploaded successfully.';
+    $result = $file['name'] . ' was uploaded successfully';
+    if(!is_null($this->newFileName)) {
+      $result .= ', and was renamed ' . $this->newFileName;
+    }
+    $result .= '.';
+    $this->messages[] = $result;
   }
 }
