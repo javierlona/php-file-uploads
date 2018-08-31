@@ -1,33 +1,16 @@
 <?php
+  use onegreatapp\UploadFile;
+
   $max = 5000 * 1024;
+  $message = "";
 
   if(isset($_POST['upload'])) {
-    echo '<pre>';
-    print_r($_FILES);
-    echo '</pre>';
-
-    $message = "";
+    require_once 'src/onegreatapp/UploadFile.php';
     $destination = __DIR__ . '/uploaded/';
-
-    if($_FILES['filename']['error'] == 0) {
-      $result = move_uploaded_file($_FILES['filename']['tmp_name'], $destination . $_FILES['filename']['name']);
-      if($result) {
-        $message = $_FILES['filename']['name'] . ' was uploaded successfully.';
-      } else {
-        $message = 'Sorry, there was a problem uploading ' . $_FILES['filename']['name'];
-      }
-    } else {
-      switch ($_FILES['filename']['error']) {
-        case 2:
-          $message = $_FILES['filename']['name'] . ' is too big to upload.';
-          break;
-        case 4:
-          $message = 'No file selected.';
-          break;
-        default:
-          $message = 'Sorry, there was a problem uploading ' .$_FILES['filename']['name'];
-          break;
-      }
+    try {
+      $upload = new UploadFile($destination);
+    } catch (Exception $e) {
+      $message = $e->getMessage();
     }
 
   }
