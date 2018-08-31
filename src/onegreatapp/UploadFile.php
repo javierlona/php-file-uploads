@@ -27,6 +27,10 @@ class UploadFile {
     }
   }
 
+  public function get_messages() {
+    return $this->messages;
+  }
+
   protected function check_file($file) {
     if($file['error'] != 0) {
       $this->get_error_message($file);
@@ -54,6 +58,7 @@ class UploadFile {
   }
 
   protected function move_file($file) {
-    echo $file['name'] . ' was uploaded successfully.';
+    // add to messages array
+    $this->messages[] = $file['name'] . ' was uploaded successfully.';
   }
 }

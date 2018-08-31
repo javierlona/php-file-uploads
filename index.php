@@ -2,7 +2,7 @@
   use onegreatapp\UploadFile;
 
   $max = 5000 * 1024;
-  $message = "";
+  $result = [];
 
   if(isset($_POST['upload'])) {
     require_once 'src/onegreatapp/UploadFile.php';
@@ -11,8 +11,9 @@
       // Instantiate new object
       $upload = new UploadFile($destination);
       $upload->upload();
+      $result = $upload->get_messages();
     } catch (Exception $e) {
-      $message = $e->getMessage();
+      $result[] = $e->getMessage();
     }
 
   }
@@ -36,17 +37,23 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="page-header">
-            <h1 id="forms">Forms</h1>
+            <h1 id="forms">Upload Form</h1>
           </div>
         </div>
       </div>
       <div class="row">
+        <?php if ($result) { ?>
+        <ul class="list-group">
+        <?php  foreach ($result as $message) {
+            echo "<li class='list-group-item d-flex justify-content-between align-items-center'>$message</li>";
+        }?>
+        </ul>
+        <?php } ?>
         <div class="col-lg-6">
           <div class="bs-component">
-            <?php echo isset($message) ? $message : ''; ?>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
               <fieldset>
-                <legend>Legend</legend>
+                <!-- <legend>Legend</legend> -->
                 <div class="form-group">
                   <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max; ?>">
                   <label for="exampleInputFile">File input</label> <input aria-describedby=
