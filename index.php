@@ -8,7 +8,9 @@
     require_once 'src/onegreatapp/UploadFile.php';
     $destination = __DIR__ . '/uploaded/';
     try {
+      // Instantiate new object
       $upload = new UploadFile($destination);
+      $upload->upload();
     } catch (Exception $e) {
       $message = $e->getMessage();
     }

@@ -15,4 +15,21 @@ class UploadFile {
     }
     $this->destination = $uploadFolder;
   }
+
+
+  public function upload() {
+    // current doesn't need to know the name of a file input field.
+    $uploaded = current($_FILES);
+    if($this->check_file($uploaded)) {
+      $this->move_file($uploaded);
+    }
+  }
+
+  public function check_file($file) {
+    return true;
+  }
+
+  protected function move_file($file) {
+    echo $file['name'] . ' was uploaded successfully.';
+  }
 }
