@@ -4,6 +4,7 @@ namespace onegreatapp;
 class UploadFile {
 
   protected $destination;
+  protected $messages = [];
 
   public function __construct($uploadFolder) {
     if(!is_dir($uploadFolder) || !is_writeable($uploadFolder)) {
@@ -19,14 +20,37 @@ class UploadFile {
 
   public function upload() {
     // current doesn't need to know the name of a file input field.
+    // $uploaded is the array details of the file uploaded
     $uploaded = current($_FILES);
     if($this->check_file($uploaded)) {
       $this->move_file($uploaded);
     }
   }
 
-  public function check_file($file) {
+  protected function check_file($file) {
+    if($file['error'] != 0) {
+      $this->get_error_message($file);
+      return false;
+    }
     return true;
+  }
+
+  protected function get_error_message($file) {
+    switch($file['error']) {
+      case 1:
+      case 2:
+        $this->messages[] = $file['name'] . ' is too big.';
+        break;
+      case 3:
+        $this->messages[] = $file['name'] . ' was only partially uploaded.';
+        break;
+      case 4:
+        $this->messages[] = 'No file submitted.';
+        break;
+      default:
+        $this->messages[] = 'Sorry, there was a problem uploading ' . $file['name'];
+        break;
+    }
   }
 
   protected function move_file($file) {
