@@ -1,7 +1,7 @@
 <?php
   use onegreatapp\UploadFile;
 
-  $max = 100 * 1024;
+  $max = 2048 * 1024;
   $result = [];
 
   if(isset($_POST['upload'])) {

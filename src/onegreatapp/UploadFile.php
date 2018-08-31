@@ -19,6 +19,12 @@ class UploadFile {
   }
 
   public function set_max_size($bytes) {
+    // we can get the value of upload max file size, using the built-in PHP function, in ini_get.
+    $serverMax = self::convert_to_bytes(ini_get('upload_max_filesize'));
+    // Throws an error if web developer sets the max size in index.php higher than server limit
+    if($bytes > $serverMax) {
+      throw new \Exception('Maximum size cannot exceed server limit for individual files: ' . self::convert_from_bytes($serverMax));
+    }
     if(is_numeric($bytes) && $bytes > 0) {
       $this->maxSize = $bytes;
     }
@@ -37,6 +43,35 @@ class UploadFile {
     return $this->messages;
   }
 
+  public static function convert_to_bytes($val) {
+    $val = trim($val);
+    $last = strtolower($val[strlen($val)-1]);
+    if(in_array($last, ['g', 'm', 'k'])) {
+      // Explicit cast to number removes the "M, K, or G"
+      $val = (float) $val;
+      echo 'float val '.$val .'<br>';
+      switch ($last) {
+          case 'g':
+              $val *= 1024;
+          case 'm':
+              $val *= 1024;
+          case 'k':
+              $val *= 1024;
+      }
+    }
+    echo 'new val '.$val .'<br>';
+    return $val;
+  }
+
+  public static function convert_from_bytes($bytes) {
+    $bytes /= 1024;
+    if($bytes > 1024) {
+        return number_format($bytes/1024, 1) . ' MB';
+    } else {
+        return number_format($bytes, 1) . ' KB';
+    }
+  }
+
   protected function check_file($file) {
     if($file['error'] != 0) {
       $this->get_error_message($file);
@@ -52,7 +87,8 @@ class UploadFile {
     switch($file['error']) {
       case 1:
       case 2:
-        $this->messages[] = $file['name'] . ' is too big.';
+      $this->messages[] = $file['name'] . ' is too big: (max: ' .
+      self::convert_from_bytes($this->maxSize) . ').';
         break;
       case 3:
         $this->messages[] = $file['name'] . ' was only partially uploaded.';
@@ -71,7 +107,7 @@ class UploadFile {
       $this->messages[] = $file['name'] . ' is empty.';
       return false;
     } elseif ($file['size'] > $this->maxSize) {
-      $this->messages[] = $file['name'] . ' exceeds the maxium size for a file.';
+      $this->messages[] = $file['name'] . ' exceeds the maxium size for a file.' . self::convert_from_bytes($this->maxsize) . ')';
       return false;
     } else {
       return true;
