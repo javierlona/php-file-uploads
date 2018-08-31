@@ -1,7 +1,7 @@
 <?php
   use onegreatapp\UploadFile;
 
-  $max = 5000 * 1024;
+  $max = 100 * 1024;
   $result = [];
 
   if(isset($_POST['upload'])) {
@@ -10,6 +10,7 @@
     try {
       // Instantiate new object
       $upload = new UploadFile($destination);
+      $upload->set_max_size($max);
       $upload->upload();
       $result = $upload->get_messages();
     } catch (Exception $e) {
