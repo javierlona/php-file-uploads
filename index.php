@@ -16,11 +16,9 @@
     } catch (Exception $e) {
       $result[] = $e->getMessage();
     }
-
   }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +36,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="page-header">
-            <h1 id="forms">Upload Form</h1>
+            <h1 id="forms">Upload Files Form</h1>
           </div>
         </div>
       </div>
@@ -57,17 +55,15 @@
                 <!-- <legend>Legend</legend> -->
                 <div class="form-group">
                   <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max; ?>">
-                  <label for="exampleInputFile">File input</label> <input aria-describedby=
+                  <!-- <label for="exampleInputFile">File input</label>  -->
+                  <input aria-describedby=
                   "fileHelp" class="form-control-file" id="filename" type="file" name="filename[]" multiple>
-                  <small class="form-text text-muted" id="fileHelp">This is some placeholder
-                  block-level help text for the above input. It's a bit lighter and easily wraps to
-                  a new line.</small>
+                  <small class="form-text text-muted" id="fileHelp">Only .png and .jpg files allowed.</small>
                 </div><button class="btn btn-primary" type="submit" name="upload">Upload File</button>
               </fieldset>
             </form>
           </div>
         </div>
-
       </div>
     </div>
   </div>
