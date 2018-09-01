@@ -138,12 +138,20 @@ class UploadFile {
   }
 
   protected function move_file($file) {
-    // add to messages array
-    $result = $file['name'] . ' was uploaded successfully';
-    if(!is_null($this->newFileName)) {
-      $result .= ', and was renamed ' . $this->newFileName;
+    // Determine if the file has been renamed
+    $filename = isset($this->newFileName) ? $this->newFileName : $file['name'];
+    $success = move_uploaded_file($file['tmp_name'], $this->destination . $filename);
+    if($success) {
+      // add to messages array
+      $result = $file['name'] . ' was uploaded successfully';
+      if(!is_null($this->newFileName)) {
+        $result .= ', and was renamed ' . $this->newFileName;
+      }
+      $result .= '.';
+      $this->messages[] = $result;
+    } else {
+      // Use the original filename
+      $this->messages[] = 'Could not upload ' . $file['name'];
     }
-    $result .= '.';
-    $this->messages[] = $result;
   }
 }
