@@ -36,9 +36,27 @@ class UploadFile {
     // current doesn't need to know the name of a file input field.
     // $uploaded is the array details of the file uploaded
     $uploaded = current($_FILES);
-    if($this->check_file($uploaded)) {
-      $this->move_file($uploaded);
+    if(is_array($uploaded['name'])) {
+      // Handle mutiple file uploads
+      foreach($uploaded['name'] as $key => $value) {
+        // Temporary file these are the keys the file contains in the array
+        $currentFile['name'] = $uploaded['name'][$key];
+        $currentFile['type'] = $uploaded['type'][$key];
+        $currentFile['tmp_name'] = $uploaded['tmp_name'][$key];
+        $currentFile['error'] = $uploaded['error'][$key];
+        $currentFile['size'] = $uploaded['size'][$key];
+        // Handle the individual file upload in array
+        if($this->check_file($currentFile)) {
+          $this->move_file($currentFile);
+        }
+      }
+    } else {
+      // Handle single file uploads
+      if($this->check_file($uploaded)) {
+        $this->move_file($uploaded);
+      }
     }
+
   }
 
   public function get_messages() {
@@ -140,6 +158,7 @@ class UploadFile {
   protected function move_file($file) {
     // Determine if the file has been renamed
     $filename = isset($this->newFileName) ? $this->newFileName : $file['name'];
+    // Returns a bool
     $success = move_uploaded_file($file['tmp_name'], $this->destination . $filename);
     if($success) {
       // add to messages array

@@ -58,7 +58,7 @@
                 <div class="form-group">
                   <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max; ?>">
                   <label for="exampleInputFile">File input</label> <input aria-describedby=
-                  "fileHelp" class="form-control-file" id="filename" type="file" name="filename">
+                  "fileHelp" class="form-control-file" id="filename" type="file" name="filename[]" multiple>
                   <small class="form-text text-muted" id="fileHelp">This is some placeholder
                   block-level help text for the above input. It's a bit lighter and easily wraps to
                   a new line.</small>
