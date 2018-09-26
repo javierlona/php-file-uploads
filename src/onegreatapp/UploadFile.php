@@ -1,12 +1,13 @@
 <?php
+
 namespace onegreatapp;
 
 class UploadFile {
 
   protected $destination;
   protected $messages = [];
-  protected $maxSize = 51200;
-  protected $permittedTypes = ['image/jpeg', 'image/png'];
+  protected $maxSize = 51200; // Default is 50 KB
+  protected $permittedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
   protected $newFileName;
 
   public function __construct($uploadFolder) {
@@ -21,20 +22,23 @@ class UploadFile {
   }
 
   public function set_max_size($bytes) {
-    // we can get the value of upload max file size, using the built-in PHP function, in ini_get.
+    // Get the value of the server's max file upload size, using the built-in PHP function, in ini_get.
     $serverMax = self::convert_to_bytes(ini_get('upload_max_filesize'));
     // Throws an error if web developer sets the max size in index.php higher than server limit
     if($bytes > $serverMax) {
+      // Display the max file size number converted from Bytes to MB or KB 
       throw new \Exception('Maximum size cannot exceed server limit for individual files: ' . self::convert_from_bytes($serverMax));
     }
+    // Check bytes value is a valid number
     if(is_numeric($bytes) && $bytes > 0) {
+      // Finally assign the value to class property maxSize
       $this->maxSize = $bytes;
     }
   }
 
   public function upload() {
     // current doesn't need to know the name of a file input field.
-    // $uploaded is the array details of the file uploaded
+    // $uploaded contains the array details (name, type, tmp_name, error, size) of the file uploaded
     $uploaded = current($_FILES);
     if(is_array($uploaded['name'])) {
       // Handle mutiple file uploads
@@ -45,7 +49,7 @@ class UploadFile {
         $currentFile['tmp_name'] = $uploaded['tmp_name'][$key];
         $currentFile['error'] = $uploaded['error'][$key];
         $currentFile['size'] = $uploaded['size'][$key];
-        // Handle the individual file upload in array
+        // Handle each individual file upload in array
         if($this->check_file($currentFile)) {
           $this->move_file($currentFile);
         }
@@ -146,9 +150,9 @@ class UploadFile {
   }
 
   protected function check_name($file) {
-    // eventually be capable of handling multiple file uploads.
-    // So, newName needs to be cleared each time this method is used.
+    // newFileName has to be cleared each time when handling multiple file uploads
     $this->newFileName = null;
+    // Replace spaces with underscores
     $noSpacesFileName = str_replace(' ', '_', $file['name']);
     if($noSpacesFileName != $file['name']) {
       $this->newFileName = $noSpacesFileName;
@@ -161,7 +165,7 @@ class UploadFile {
     // Returns a bool
     $success = move_uploaded_file($file['tmp_name'], $this->destination . $filename);
     if($success) {
-      // add to messages array
+      // Add to messages array
       $result = $file['name'] . ' was uploaded successfully';
       if(!is_null($this->newFileName)) {
         $result .= ', and was renamed ' . $this->newFileName;

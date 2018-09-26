@@ -1,22 +1,30 @@
 <?php
-  use onegreatapp\UploadFile;
+// Namespaces define the location of class file. The 'use' statement allows us the ability to create a new object without writing the entire namespace.
+use onegreatapp\UploadFile;
 
-  $max = 2048 * 1024;
-  $result = [];
+// Equivalent to 2MB, file size stated in bytes
+$max = 2048 * 1024;
 
-  if(isset($_POST['upload'])) {
-    require_once 'src/onegreatapp/UploadFile.php';
-    $destination = __DIR__ . '/uploaded/';
-    try {
-      // Instantiate new object
-      $upload = new UploadFile($destination);
-      $upload->set_max_size($max);
-      $upload->upload();
-      $result = $upload->get_messages();
-    } catch (Exception $e) {
-      $result[] = $e->getMessage();
-    }
+// App messages are stored in result array
+$result = [];
+
+if(isset($_POST['upload'])) {
+  // Call the Upload Class
+  require_once 'src/onegreatapp/UploadFile.php';
+
+  // Set the destination where to save the uploaded files
+  $destination = __DIR__ . '/src/onegreatapp/uploaded/';
+
+  try {
+    // Instantiate new object
+    $upload = new UploadFile($destination);
+    $upload->set_max_size($max);
+    $upload->upload();
+    $result = $upload->get_messages();
+  } catch (Exception $e) {
+    $result[] = $e->getMessage();
   }
+}
 
 ?>
 <!DOCTYPE html>
@@ -52,13 +60,11 @@
           <div class="bs-component">
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
               <fieldset>
-                <!-- <legend>Legend</legend> -->
                 <div class="form-group">
                   <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max; ?>">
-                  <!-- <label for="exampleInputFile">File input</label>  -->
                   <input aria-describedby=
                   "fileHelp" class="form-control-file" id="filename" type="file" name="filename[]" multiple>
-                  <small class="form-text text-muted" id="fileHelp">Only .png and .jpg files allowed.</small>
+                  <small class="form-text text-muted" id="fileHelp">Only .png, .jpg, and .jpeg files allowed.</small>
                 </div><button class="btn btn-primary" type="submit" name="upload">Upload File</button>
               </fieldset>
             </form>
