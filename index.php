@@ -34,7 +34,6 @@ if(isset($_POST['upload'])) {
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="ie=edge" http-equiv="X-UA-Compatible">
   <link rel="stylesheet" href="./css/style.css">
-  <!-- <link href="https://bootswatch.com/4/lumen/bootstrap.css" rel="stylesheet"> -->
   <title>PHP File Uploads</title>
 </head>
 <body>
@@ -90,5 +89,6 @@ if(isset($_POST['upload'])) {
       // }
     ?>
   </div>
+  <script src="./js/script.js"></script>
 </body>
 </html>
