@@ -33,52 +33,62 @@ if(isset($_POST['upload'])) {
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <link rel="stylesheet" href="./css/style.css">
   <!-- <link href="https://bootswatch.com/4/lumen/bootstrap.css" rel="stylesheet"> -->
   <title>PHP File Uploads</title>
 </head>
 <body>
   <div class="container">
-    <!-- Forms
-          ================================================== -->
-    <div class="bs-docs-section">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="page-header">
-            <h1 id="forms">Upload Files Form</h1>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <?php if ($result) { ?>
-        <ul class="list-group">
-        <?php  foreach ($result as $message) {
-            echo "<li class='list-group-item d-flex justify-content-between align-items-center'>$message</li>";
-        }?>
-        </ul>
-        <?php } ?>
-        <div class="col-lg-6">
-          <div class="bs-component">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
-              <fieldset>
-                <div class="form-group">
-                  <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max; ?>">
-                  <input aria-describedby=
-                  "fileHelp" class="form-control-file" id="filename" type="file" name="filename[]" multiple>
-                  <small class="form-text text-muted" id="fileHelp">Only .png, .jpg, and .jpeg files allowed.</small>
-                </div><button class="btn btn-primary" type="submit" name="upload">Upload File</button>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <h1 id="forms">Upload Files Form</h1>
+    <?php if ($result) { ?>
+    <ul class="list-group">
+    <?php  foreach ($result as $message) {
+        echo "<li class='list-group-item d-flex justify-content-between align-items-center'>$message</li>";
+    }?>
+    </ul>
+    <?php } ?>  
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+      <fieldset>
+          <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max; ?>">
+          <input aria-describedby=
+          "fileHelp" class="form-control-file" id="filename" type="file" name="filename[]" multiple>
+          <small class="form-text text-muted" id="fileHelp">Only .png, .jpg, and .jpeg files allowed.</small>
+        <button class="btn btn-primary" type="submit" name="upload">Upload File</button>
+      </fieldset>
+    </form>
 
   <div class="container">
     <div class="main-img">
-      <img src="./src/onegreatapp/uploaded/books-corrupts.jpeg" alt="">
+      <img src="./src/onegreatapp/uploaded/img1.jpeg" alt="">
+    </div>
+    
+    <div class="imgs">
+      <img src="./src/onegreatapp/uploaded/img1.jpeg" alt="">
+    </div>
+    <div class="imgs">
+      <img src="./src/onegreatapp/uploaded/img2.jpeg" alt="">
+    </div>
+    <div class="imgs">
+      <img src="./src/onegreatapp/uploaded/img3.jpeg" alt="">
+    </div>
+    <div class="imgs">
+      <img src="./src/onegreatapp/uploaded/img4.jpeg" alt="">
+    </div>
+    <div class="imgs">
+      <img src="./src/onegreatapp/uploaded/img5.jpeg" alt="">
+    </div>
+    <div class="imgs">
+      <img src="./src/onegreatapp/uploaded/img6.jpeg" alt="">
+    </div>
+    <div class="imgs">
+      <img src="./src/onegreatapp/uploaded/img7.jpeg" alt="">
+    </div>
+    <div class="imgs">
+      <img src="./src/onegreatapp/uploaded/img8.jpeg" alt="">
     </div>
   </div>
+
+
 
   <div class="container">
     <?php 
