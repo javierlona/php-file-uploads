@@ -1,7 +1,7 @@
 const current = document.querySelector('#current');
+
 // Returns a nodelist of imgs
 const imgs = document.querySelectorAll('.imgs>img');
-
 
 // Create an event listener to respond to each image clicked
 imgs.forEach(function() {
