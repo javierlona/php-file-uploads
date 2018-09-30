@@ -38,10 +38,10 @@ if(isset($_POST['upload'])) {
 </head>
 <body>
   <div class="container">
-    <h1 id="forms">Upload Files Form</h1>
+    <h1>Upload Images Form</h1>
     <?php if ($result) { ?>
-    <ul class="list-group">
-    <?php  foreach ($result as $message) {
+    <ul>
+    <?php foreach ($result as $message) {
         echo "<li class='list-group-item d-flex justify-content-between align-items-center'>$message</li>";
     }?>
     </ul>
@@ -50,15 +50,14 @@ if(isset($_POST['upload'])) {
       <fieldset>
           <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max; ?>">
           <input aria-describedby=
-          "fileHelp" class="form-control-file" id="filename" type="file" name="filename[]" multiple>
-          <small class="form-text text-muted" id="fileHelp">Only .png, .jpg, and .jpeg files allowed.</small>
-        <button class="btn btn-primary" type="submit" name="upload">Upload File</button>
+          "fileHelp" id="filename" type="file" name="filename[]" multiple>
+          <small id="fileHelp">Only .png, .jpg, and .jpeg files allowed.</small>
+        <button type="submit" name="upload">Upload File</button>
       </fieldset>
     </form>
 
-  <div class="container">
     <div class="main-img">
-      <img id="current" src="./src/onegreatapp/uploaded/img1.jpeg" alt="">
+      <img id="current" src="" alt="">
     </div>
     
     <div class="imgs">
@@ -72,22 +71,19 @@ if(isset($_POST['upload'])) {
       <img src="./src/onegreatapp/uploaded/img8.jpeg" alt="">
   </div>
 
-
-
-  <div class="container">
-    <?php 
-      // Set the destination where to save the uploaded files
-      // $destination = __DIR__ . '/src/onegreatapp/uploaded/';
-      // $dir = new DirectoryIterator($destination);
-      // foreach ($dir as $fileinfo) {
-      //   if (!$fileinfo->isDot()) { 
-          ?>
-        <!-- <img src="<?php //echo './src/onegreatapp/uploaded/' . $fileinfo->getFilename(); ?>" alt=""> -->
-        
-    <?php
-      //   }
-      // }
-    ?>
+  <?php 
+    // Set the destination where to save the uploaded files
+    // $destination = __DIR__ . '/src/onegreatapp/uploaded/';
+    // $dir = new DirectoryIterator($destination);
+    // foreach ($dir as $fileinfo) {
+    //   if (!$fileinfo->isDot()) { 
+        ?>
+      <!-- <img src="<?php //echo './src/onegreatapp/uploaded/' . $fileinfo->getFilename(); ?>" alt=""> -->
+      
+  <?php
+    //   }
+    // }
+  ?>
   </div>
   <script src="./js/script.js"></script>
 </body>

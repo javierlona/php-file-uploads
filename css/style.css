@@ -1,13 +1,16 @@
 body {
   margin: 20px;
   padding: 0;
-  background: #333;
+  background: #200234;
+  color: #fff;
 }
 .container {
   max-width: 760px;
   margin: auto;
-  border: #fff solid 3px;
-  background-color: #fff;
+  padding: 10px;
+  border: tomato dashed 10px;
+  background-color: #e775d8
+  ;
 }
 .main-img img, .imgs img {
   width: 100%;
