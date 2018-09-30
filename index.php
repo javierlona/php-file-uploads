@@ -33,7 +33,7 @@ if(isset($_POST['upload'])) {
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="ie=edge" http-equiv="X-UA-Compatible">
-  <link href="https://bootswatch.com/4/lumen/bootstrap.css" rel="stylesheet">
+  <!-- <link href="https://bootswatch.com/4/lumen/bootstrap.css" rel="stylesheet"> -->
   <title>PHP File Uploads</title>
 </head>
 <body>
@@ -72,6 +72,28 @@ if(isset($_POST['upload'])) {
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="container">
+    <div class="main-img">
+      <img src="./src/onegreatapp/uploaded/books-corrupts.jpeg" alt="">
+    </div>
+  </div>
+
+  <div class="container">
+    <?php 
+      // Set the destination where to save the uploaded files
+      // $destination = __DIR__ . '/src/onegreatapp/uploaded/';
+      // $dir = new DirectoryIterator($destination);
+      // foreach ($dir as $fileinfo) {
+      //   if (!$fileinfo->isDot()) { 
+          ?>
+        <!-- <img src="<?php //echo './src/onegreatapp/uploaded/' . $fileinfo->getFilename(); ?>" alt=""> -->
+        
+    <?php
+      //   }
+      // }
+    ?>
   </div>
 </body>
 </html>
