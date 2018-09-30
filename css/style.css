@@ -1,15 +1,21 @@
+:root {
+  --background: #200234;
+  --secondary: #e775d8;
+  --text: #ffffff;
+}
+
 body {
   margin: 20px;
   padding: 0;
-  background: #200234;
-  color: #fff;
+  background: var(--background);
+  color: var(--text);
 }
 .container {
   max-width: 760px;
   margin: auto;
   padding: 10px;
   border: tomato dashed 10px;
-  background-color: #e775d8
+  background-color: var(--secondary);
   ;
 }
 .main-img img, .imgs img {
@@ -29,4 +35,20 @@ body {
 .fade-in {
   opacity: 0;
   animation: fadeIn 0.5s ease-in 1 forwards;
+}
+
+/* Media Queries */
+/* At screens smaller than 760px */
+@media (max-width: 760px) {
+  .imgs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+/* At screens smaller than 320px */
+@media (max-width: 320px) {
+  .imgs {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }

@@ -69,21 +69,21 @@ if(isset($_POST['upload'])) {
       <img src="./src/onegreatapp/uploaded/img6.jpeg" alt="">
       <img src="./src/onegreatapp/uploaded/img7.jpeg" alt="">
       <img src="./src/onegreatapp/uploaded/img8.jpeg" alt="">
-  </div>
+    </div>
 
-  <?php 
-    // Set the destination where to save the uploaded files
-    // $destination = __DIR__ . '/src/onegreatapp/uploaded/';
-    // $dir = new DirectoryIterator($destination);
-    // foreach ($dir as $fileinfo) {
-    //   if (!$fileinfo->isDot()) { 
-        ?>
-      <!-- <img src="<?php //echo './src/onegreatapp/uploaded/' . $fileinfo->getFilename(); ?>" alt=""> -->
-      
-  <?php
-    //   }
-    // }
-  ?>
+    <?php 
+      // Set the destination where to save the uploaded files
+      // $destination = __DIR__ . '/src/onegreatapp/uploaded/';
+      // $dir = new DirectoryIterator($destination);
+      // foreach ($dir as $fileinfo) {
+      //   if (!$fileinfo->isDot()) { 
+          ?>
+        <!-- <img src="<?php //echo './src/onegreatapp/uploaded/' . $fileinfo->getFilename(); ?>" alt=""> -->
+          
+      <?php
+        //   }
+        // }
+      ?>
   </div>
   <script src="./js/script.js"></script>
 </body>
