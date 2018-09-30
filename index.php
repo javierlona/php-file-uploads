@@ -59,33 +59,18 @@ if(isset($_POST['upload'])) {
 
   <div class="container">
     <div class="main-img">
-      <img src="./src/onegreatapp/uploaded/img1.jpeg" alt="">
+      <img id="current" src="./src/onegreatapp/uploaded/img1.jpeg" alt="">
     </div>
     
     <div class="imgs">
       <img src="./src/onegreatapp/uploaded/img1.jpeg" alt="">
-    </div>
-    <div class="imgs">
       <img src="./src/onegreatapp/uploaded/img2.jpeg" alt="">
-    </div>
-    <div class="imgs">
       <img src="./src/onegreatapp/uploaded/img3.jpeg" alt="">
-    </div>
-    <div class="imgs">
       <img src="./src/onegreatapp/uploaded/img4.jpeg" alt="">
-    </div>
-    <div class="imgs">
       <img src="./src/onegreatapp/uploaded/img5.jpeg" alt="">
-    </div>
-    <div class="imgs">
       <img src="./src/onegreatapp/uploaded/img6.jpeg" alt="">
-    </div>
-    <div class="imgs">
       <img src="./src/onegreatapp/uploaded/img7.jpeg" alt="">
-    </div>
-    <div class="imgs">
       <img src="./src/onegreatapp/uploaded/img8.jpeg" alt="">
-    </div>
   </div>
 
 
