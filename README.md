@@ -4,6 +4,9 @@
 ## Live Demo
 [Click for a Live Demo Here](http://onegreatapp.com/php-upload-image-gallery/)
 
+## Installation Notes
+Set 'uploaded' folder permissions to 767.
+
 ## Description
 A simple image gallery with thumbnails and a fade effect. The user can upload images which are then automatically aligned using CSS Grid.
 
