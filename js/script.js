@@ -10,12 +10,18 @@ imgs.forEach(function() {
 
 // Describe how to handle each image click
 function click_image(event) {
-  // Add fade in class
-  current.classList.add('fade-in');
+  // Only perform following actions when an image is clicked
+  if(event.target.src !== undefined){
 
-  // Remove fade-in class after .5 seconds
-  setTimeout(() => current.classList.remove('fade-in'), 500);
-
-  // Change current big image to the selected image src
-  current.src = event.target.src;
+    // Add fade in class
+    current.classList.add('fade-in');
+    
+    // Remove fade-in class after .5 seconds
+    setTimeout(() => current.classList.remove('fade-in'), 500);
+    
+    // Change current big image to the selected image src
+    current.src = event.target.src;
+  } else {
+    // Do nothing 
+  }
 }

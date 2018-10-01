@@ -57,33 +57,24 @@ if(isset($_POST['upload'])) {
     </form>
 
     <div class="main-img">
-      <img id="current" src="" alt="">
+      <img id="current" src="">
     </div>
     
     <div class="imgs">
-      <img src="./src/onegreatapp/uploaded/img1.jpeg" alt="">
-      <img src="./src/onegreatapp/uploaded/img2.jpeg" alt="">
-      <img src="./src/onegreatapp/uploaded/img3.jpeg" alt="">
-      <img src="./src/onegreatapp/uploaded/img4.jpeg" alt="">
-      <img src="./src/onegreatapp/uploaded/img5.jpeg" alt="">
-      <img src="./src/onegreatapp/uploaded/img6.jpeg" alt="">
-      <img src="./src/onegreatapp/uploaded/img7.jpeg" alt="">
-      <img src="./src/onegreatapp/uploaded/img8.jpeg" alt="">
-    </div>
-
-    <?php 
-      // Set the destination where to save the uploaded files
-      // $destination = __DIR__ . '/src/onegreatapp/uploaded/';
-      // $dir = new DirectoryIterator($destination);
-      // foreach ($dir as $fileinfo) {
-      //   if (!$fileinfo->isDot()) { 
-          ?>
-        <!-- <img src="<?php //echo './src/onegreatapp/uploaded/' . $fileinfo->getFilename(); ?>" alt=""> -->
-          
-      <?php
-        //   }
-        // }
+      <?php 
+        // Set the destination where to save the uploaded files
+        $uploadFolder = __DIR__ . '/src/onegreatapp/uploaded/';
+        $dir = new DirectoryIterator($uploadFolder);
+        foreach ($dir as $fileinfo){
+          if(!$fileinfo->isDot()){
       ?>
+          <img src="<?php echo './src/onegreatapp/uploaded/' . $fileinfo->getFilename(); ?>">
+            
+      <?php
+          };
+        };
+      ?>
+    </div>
   </div>
   <script src="./js/script.js"></script>
 </body>
