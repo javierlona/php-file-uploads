@@ -2,7 +2,7 @@
 ![Demo Image](img/php-upload-image-gallery-demo.jpg)
 
 ## Live Demo
-[Click for a Live Demo Here](http://onegreatapp.com/php-upload-image-gallery/)
+[Click for a Live Demo Here](http://apps.javierlona.com/php-upload-image-gallery/)
 
 ## Installation Notes
 Set 'uploaded' folder permissions to 767.
